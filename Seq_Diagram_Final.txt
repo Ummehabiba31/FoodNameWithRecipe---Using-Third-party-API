@@ -1,0 +1,26 @@
+title Final Project
+
+
+participant User
+participant Server
+participant Spoonacular API
+participant USDA API
+
+
+
+User->(1)Server:Browser requests "/" (root of our site)
+Server->(1)User: Sends 200 Okay, Returns index.html (form)
+User->(1)Server:User fills out index.html form (supplies data: **ingredient name**) \nsends data embedded in URL by GET method "/Search" 
+
+
+Server->Spoonacular API: sends request to an endpoint\nhttps://api.spoonacular.com/recipes/findByIngredients? \nincludes apiKey& includes ingredient (user input)
+
+
+Server<-Spoonacular API: sends back 200 OK as a response\n and a json file with the search results
+
+Server->USDA API: sends request to an endpoint\nhttps://api.nal.usda.gov/fdc/v1/foods/search?\nincludes apiKey and includes query (user input)
+
+
+Server<-USDA API: sends back 200 OK as a response\n and a json file with the search results
+
+Server->User: sends as a result (a meal name got from API 1 and \nan ingredient name got from API 2) and shows the \nresult to the use  
